@@ -35,7 +35,7 @@ prom2teams:
 
 podAnnotations: {}
 
-securityContext: {}
+securityContext:
   privileged: false
   readOnlyRootFilesystem: false
   allowPrivilegeEscalation: false
