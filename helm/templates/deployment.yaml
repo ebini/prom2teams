@@ -22,12 +22,16 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       volumes:
         - name: config
           configMap:
             name: {{ include "prom2teams.fullname" . }}
       containers:
         - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
@@ -64,15 +68,6 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-        {{- if .Values.securityContext.enabled }}
-          securityContext:
-            privileged: false
-            readOnlyRootFilesystem: false
-            allowPrivilegeEscalation: false
-            capabilities:
-              drop:
-              - ALL
-        {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -85,11 +80,5 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-    {{- if .Values.securityContext.enabled }}
-      securityContext:
-        runAsNonRoot: {{ if eq (int .Values.securityContext.runAsUser) 0 }}false{{ else }}true{{ end }}
-        runAsUser: {{ .Values.securityContext.runAsUser }}
-        runAsGroup: {{ .Values.securityContext.runAsGroup }}
-        fsGroup: {{ .Values.securityContext.fsGroup }}
     {{- end }}
 
