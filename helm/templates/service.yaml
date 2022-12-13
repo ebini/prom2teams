@@ -4,10 +4,11 @@ metadata:
   name: {{ include "prom2teams.fullname" . }}
   labels:
 {{ include "prom2teams.labels" . | indent 4 }}
-  {{- if .Values.service.annotations }}
-annotations:
-  {{ toYaml .Values.service.annotations | indent 4 }}
-  {{- end }}
+{{ include "prom2teams.labels" . | indent 4 }}
+{{- if .Values.service.annotations }}
+  annotations:
+{{ toYaml .Values.service.annotations | indent 4 }}
+{{- end }}
 spec:
   type: {{ .Values.service.type }}
   ports:
