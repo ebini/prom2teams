@@ -35,7 +35,6 @@ Create chart name and version as used by the chart label.
 Common labels
 */}}
 {{- define "prom2teams.labels" -}}
-app.kubernetes.io/name: {{ include "prom2teams.name" . }}
 helm.sh/chart: {{ include "prom2teams.chart" . }}
 {{ include "prom2teams.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
