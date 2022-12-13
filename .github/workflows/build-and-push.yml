@@ -33,4 +33,4 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: ebini/prom2teams:latest
+          tags: ebini/prom2teams:latest,ebini/prom2teams:$(date +%s)
