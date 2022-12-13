@@ -23,7 +23,7 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: prom2teams-config
+            name: {{ include "prom2teams.fullname" . }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}"
