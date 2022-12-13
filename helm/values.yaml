@@ -22,6 +22,7 @@ service:
 prom2teams:
   host: 0.0.0.0
   port: 8089
+  metrics: false
   connector:
   connectors: {}
   # group_alerts_by can be one of
