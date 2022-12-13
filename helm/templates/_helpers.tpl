@@ -37,10 +37,17 @@ Common labels
 {{- define "prom2teams.labels" -}}
 app.kubernetes.io/name: {{ include "prom2teams.name" . }}
 helm.sh/chart: {{ include "prom2teams.chart" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
-release: {{ .Release.Name }}
+{{ include "prom2teams.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end -}}
+
+{{/*
+Selector labels
+*/}}
+{{- define "prom2teams.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "prom2teams.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
