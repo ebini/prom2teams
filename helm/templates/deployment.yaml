@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ include "prom2teams.fullname" . }}
   labels:
-{{ include "prom2teams.labels" . | indent 4 }}
+    {{- include "prom2teams.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -11,6 +11,10 @@ spec:
       {{- include "prom2teams.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       labels:
         {{- include "prom2teams.selectorLabels" . | nindent 8 }}
     spec:

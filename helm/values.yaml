@@ -33,6 +33,8 @@ prom2teams:
   config: /opt/prom2teams/helmconfig/config.ini
   extraEnv: {}
 
+podAnnotations: {}
+
 # Security Context properties
 securityContext:
   # enabled is a flag to enable Security Context
