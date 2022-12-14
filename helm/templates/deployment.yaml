@@ -54,8 +54,7 @@ spec:
             value: {{ .Values.prom2teams.group_alerts_by | quote }}
           - name: PROM2TEAMS_LOGLEVEL
             value: {{ .Values.prom2teams.loglevel }}
-          # - name: PROM2TEAMS_PROMETHEUS_METRICS not working anymore: https://github.com/idealista/prom2teams/issues/201
-          - name: DEBUG_METRICS
+          - name: PROM2TEAMS_PROMETHEUS_METRICS
             value: {{ .Values.prom2teams.metrics | quote }}
           {{- range $key, $value := .Values.prom2teams.extraEnv }}
           - name: "{{ $key }}"
