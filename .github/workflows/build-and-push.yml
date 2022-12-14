@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    name: Build Docker
+    name: Build Docker for Dockerhub
 #    if: ${{ github.repository == 'idealista/prom2teams' }}
     runs-on: ubuntu-latest
 
